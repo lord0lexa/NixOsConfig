@@ -11,7 +11,14 @@
       ./firefox.nix
     ];
 
-  # Bootloader.
+  # Install the driver
+  services.fprintd.enable = true;
+  # If simply enabling fprintd is not enough, try enabling fprintd.tod...
+  services.fprintd.tod.enable = true;
+  # ...and use one of the next four drivers
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix; # Goodix driver module
+
+  # Bootloahttps://wiki.nixos.org/wiki/Fingerprint_scannerder.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -89,7 +96,7 @@
   users.users.alex = {
     isNormalUser = true;
     description = "gworlpad";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "vboxusers" ];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -134,5 +141,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
-
 }

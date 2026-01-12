@@ -19,5 +19,7 @@
 	jetbrains.idea
 	virtualbox
 	vim
+	pdfstudio2024
+	ghidra
   ];
 }
