@@ -22,5 +22,6 @@
 	pdfstudio2024
 	ghidra
 	calibre
+	wireguard-tools
   ];
 }

@@ -71,7 +71,16 @@
   console.keyMap = "de";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+services.printing = {
+  enable = true;
+  drivers = [
+    pkgs.gutenprint
+    pkgs.hplip
+    pkgs.foomatic-db
+    pkgs.foomatic-db-engine
+    pkgs.foomatic-db-ppds
+  ];
+};
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -113,6 +122,7 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+	fprintd
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -141,4 +151,8 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
+
+
+  services.resolved.enable = true;
+
 }
