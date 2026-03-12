@@ -11,6 +11,32 @@
       ./firefox.nix
     ];
 
+  #enable linux binaries
+  programs.nix-ld.enable = true;
+
+ programs.nix-ld.libraries = with pkgs; [
+  icu
+  zlib
+  openssl
+  stdenv.cc.cc.lib
+
+  fontconfig
+  freetype
+  harfbuzz
+
+  xorg.libX11
+  xorg.libXext
+  xorg.libXrender
+  xorg.libXi
+  xorg.libXrandr
+  xorg.libXcursor
+  xorg.libXfixes
+  xorg.libICE
+  xorg.libSM
+];
+
+  security.pam.services.gdm.enable = true;  # aktiviert PAM für GDM
+
   # Install the driver
   services.fprintd.enable = true;
   # If simply enabling fprintd is not enough, try enabling fprintd.tod...
@@ -21,6 +47,8 @@
   # Bootloahttps://wiki.nixos.org/wiki/Fingerprint_scannerder.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  services.flatpak.enable = true;
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -155,4 +183,5 @@ services.printing = {
 
   services.resolved.enable = true;
 
+  programs.steam.enable = true;
 }

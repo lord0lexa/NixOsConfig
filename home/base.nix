@@ -23,5 +23,12 @@
 	ghidra
 	calibre
 	wireguard-tools
+	zotero
+	libreoffice-qt
+ 	hunspell
+ 	hunspellDicts.de_DE
+ 	hunspellDicts.en_US
+	nodejs
+	mplayer
   ];
 }
